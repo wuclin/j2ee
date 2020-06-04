@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlu.jtee.mapper.ChoiceQuestionMapper">
+
+    <insert id="importChoice" parameterType="com.jlu.jtee.domain.ChoiceQuestion">
+     INSERT INTO `choicequestion`( `content`, `answer`, `createTime`, `contributor`, `choiceA`, `choiceB`,`choiceC`,`choiceD`,`choiceE`,`choiceF`,`type`)
+     VALUES  (#{choiceQuestion.content}, #{choiceQuestion.answer}, #{choiceQuestion.createTime}, #{choiceQuestion.contributor},#{choiceQuestion.choiceA},
+     #{choiceQuestion.choiceB},#{choiceQuestion.choiceC},#{choiceQuestion.choiceD},#{choiceQuestion.choiceE},#{choiceQuestion.choiceF},#{choiceQuestion.type});
+    </insert>
+
+</mapper>

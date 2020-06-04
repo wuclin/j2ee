@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlu.jtee.mapper.StudentMapper">
+
+  <select id="sel" resultType="com.jlu.jtee.domain.Student">
+      select * from student where id=#{id}
+  </select>
+
+    <select id="checkoutUsername" resultType="com.jlu.jtee.domain.Student">
+        select * from student where username=#{username} and role=0
+    </select>
+
+    <select id="checkoutPassword" resultType="com.jlu.jtee.domain.Student">
+        select * from student where password=#{password} and role=0
+    </select>
+
+    <select id="checkoutAdmin" resultType="com.jlu.jtee.domain.Student">
+        select * from student where role=1 and username=#{username} and password=#{password}
+    </select>
+</mapper>

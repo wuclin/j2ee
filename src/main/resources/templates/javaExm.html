@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>java测试页面</title>
+    <link rel="stylesheet" href="/asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
+    <script src="/asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
+    <script src="/asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
+    <link rel="stylesheet" href="/asserts/css/com.css">
+    <div class="header-main">
+        <div id="head" th:include="com/header :: common_head"></div>
+    </div>
+</head>
+<body>
+<div class="panel panel-default" id="main" style="width: 80%;margin:1% 2% 5% 5%;float: left;">
+    <div class="panel-heading" style="background-color: white">
+        <a href=”#” onClick="javascript :history.go(-1);return false">返回上一页</a>
+
+    </div>
+    <ul class="list-group" style="width: 100%">
+        <li class="list-group-item">
+            <div style="height: 50px">
+                <div style="width: 100%;float: right">
+                    <h1>java测试题目</h1>
+                    <hr>
+                    <ul class="list-group" style="font-size: x-large">
+                        <li class="list-group-item"><a href="#">java EXM1</a></li>
+                        <li class="list-group-item"><a href="#">java EXM1</a></li>
+                        <li class="list-group-item"><a href="#">java EXM1</a></li>
+                        <li class="list-group-item"><a href="#">java EXM1</a></li>
+                        <li class="list-group-item"><a href="#">java EXM1</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+<div class="sidebar-footer">
+    <div th:include="com/footer :: common_footer"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <footer th:fragment="common_head">
+        <header>
+            <nav class="navbar navbar-default" role="navigation" style="background-color: white">
+                <div class="container-fluid" style="margin-left: 10%">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">学习教育网站</a>
+                    </div>
+                    <div>
+                        <!--向左对齐-->
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="/tab/play">签到</a></li>
+                            <li><a href="/tab/science">考试</a></li>
+                            <li><a href="/tab/other">其他</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <p class="navbar-text"><a data-toggle="modal" >你好，[[${session.loginUser}]]</a></p>
+                            </li>
+                            <li>
+                                <p class="navbar-text"><a  th:href="@{/Student/exit}">退出</a></p>
+                            </li>
+
+                            <li>
+                                <p class="navbar-text" th:if="${session.flag == 1}"><a href="/import" data-toggle="modal" >上传试卷</a></p>
+                                <p class="navbar-text" th:if="${session.flag == 0}"><a data-toggle="modal" data-target="#Rsignup">修改资料</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+    </footer>
+</head>
+</html>

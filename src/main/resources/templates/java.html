@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>java页面</title>
+    <link rel="stylesheet" href="asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
+    <script src="asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
+    <script src="asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
+    <link rel="stylesheet" href="asserts/css/com.css">
+    <div class="header-main">
+        <div id="head" th:include="com/header :: common_head"></div>
+    </div>
+</head>
+<body>
+
+
+<div class="panel panel-default" id="main" style="width: 80%;margin:1% 2% 5% 5%;float: left;">
+    <div class="panel-heading" style="background-color: white">
+        <a href=”#” onClick="javascript :history.go(-1);return false">返回上一页</a>
+
+    </div>
+    <ul class="list-group" style="width: 100%">
+        <li class="list-group-item">
+            <div style="height: 50px">
+                <div style="width: 100%;float: right">
+                        <h1>Java 教程</h1>
+                    <p>Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。</p>
+
+                    <p>        Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的系统。</p>
+
+                    <p>        本教程通过简单的实例将让大家更好的了解JAVA编程语言。</p>
+                        <p><a class="btn btn-primary btn-lg" href="https://www.runoob.com/java/java-tutorial.html" role="button">了解更多</a></p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+<div class="sidebar-footer">
+    <div th:include="com/footer :: common_footer"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>java页面</title>
+    <link rel="stylesheet" href="asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
+    <script src="asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
+    <script src="asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
+    <link rel="stylesheet" href="asserts/css/com.css">
+    <div class="header-main">
+        <div id="head" th:include="com/header :: common_head"></div>
+    </div>
+</head>
+<body>
+<div class="panel panel-default" id="main" style="width: 80%;margin:1% 2% 5% 5%;float: left;">
+    <div class="panel-heading" style="background-color: white">
+        <a style="margin-right: 2%">上传文件</a>
+    </div>
+    <form class="navbar-form navbar-left" role="search" method="post" action="/upload" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="file" class="form-control" name="file" placeholder="文件名"><br>
+            <p th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+        </div>
+        <button type="submit" class="btn btn-default">上传</button>
+        <a type="button"  href="/import/choiceQuestion" class="btn btn-default">生成试卷</a>
+    </form>
+</div>
+
+<div class="sidebar-footer">
+    <div th:include="com/footer :: common_footer"></div>
+</div>
+<script>
+
+</script>
+</body>
+</html>
