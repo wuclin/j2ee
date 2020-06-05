@@ -111,4 +111,22 @@ public class ChoiceQuestion {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "ChoiceQuestion{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", answer='" + answer + '\'' +
+                ", contributor='" + contributor + '\'' +
+                ", choiceA='" + choiceA + '\'' +
+                ", choiceB='" + choiceB + '\'' +
+                ", choiceC='" + choiceC + '\'' +
+                ", choiceD='" + choiceD + '\'' +
+                ", choiceE='" + choiceE + '\'' +
+                ", choiceF='" + choiceF + '\'' +
+                ", type='" + type + '\'' +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

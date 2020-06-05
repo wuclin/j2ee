@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -19,7 +20,8 @@ public class uploadController {
 
 
     @PostMapping("/upload")
-    public String upload(@RequestParam("file") MultipartFile file,Map<String, Object> map) {
+    public String upload(@RequestParam("file") MultipartFile file,Map<String, Object> map,
+    HttpSession session ) {
         if (file.isEmpty()) {
             map.put("msg","上传失败，请选择文件");
             return "import";
@@ -31,9 +33,10 @@ public class uploadController {
         File dest = new File(filePath + fileName);
         try {
             file.transferTo(dest);
+            dest.toString();
             LOGGER.info("上传成功");
             map.put("msg","上传成功");
-
+            session.setAttribute("fileName",dest);
             return "import";
         } catch (IOException e) {
             LOGGER.error(e.toString(), e);
