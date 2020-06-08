@@ -8,4 +8,15 @@
      #{choiceQuestion.choiceB},#{choiceQuestion.choiceC},#{choiceQuestion.choiceD},#{choiceQuestion.choiceE},#{choiceQuestion.choiceF},#{choiceQuestion.type});
     </insert>
 
+    <select id="getTypeList" resultType="string">
+        select DISTINCT type from choicequestion
+    </select>
+
+    <select id="getListByType" resultType="com.jlu.jtee.domain.ChoiceQuestion">
+        select DISTINCT * from choicequestion where type=#{type}
+    </select>
+
+    <select id="getAnswerById" resultType="string">
+        select answer from choicequestion where id=#{TiHao}
+    </select>
 </mapper>

@@ -108,11 +108,11 @@ public class QuestionImportController {
             logger.info("导入"+cnt+"道题目");
         }else{
             logger.info("文件不存在");
-            map.put("msg","导入失败");
+            map.put("Msg","导入失败");
 
             return "redirect:/import.html";
         }
-        map.put("msg","导入成功");
+        map.put("Msg","导入成功");
         return "redirect:/import.html";
 
     }

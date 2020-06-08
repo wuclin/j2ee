@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>java测试页面</title>
+    <title>java试卷列表</title>
     <link rel="stylesheet" href="/asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
     <script src="/asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
     <script src="/asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
@@ -24,11 +24,9 @@
                     <h1>java测试题目</h1>
                     <hr>
                     <ul class="list-group" style="font-size: x-large">
-                        <li class="list-group-item"><a href="#">java EXM1</a></li>
-                        <li class="list-group-item"><a href="#">java EXM1</a></li>
-                        <li class="list-group-item"><a href="#">java EXM1</a></li>
-                        <li class="list-group-item"><a href="#">java EXM1</a></li>
-                        <li class="list-group-item"><a href="#">java EXM1</a></li>
+                        <li th:each="type:${TypeList}" class="list-group-item">
+                            <a th:href="@{'/choice/getListByType?type='+${type}}">[[${type}]]</a>
+                        </li>
                     </ul>
 
                 </div>

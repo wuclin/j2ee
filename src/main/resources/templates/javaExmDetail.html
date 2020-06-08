@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>java试卷列表</title>
+    <link rel="stylesheet" href="/asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
+    <script src="/asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
+    <script src="/asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
+    <link rel="stylesheet" href="/asserts/css/com.css">
+    <div class="header-main">
+        <div id="head" th:include="com/header :: common_head"></div>
+    </div>
+</head>
+<body>
+<div class="panel panel-default" id="main" style="width: 80%;margin:1% 2% 5% 5%;float: left;">
+    <div class="panel-heading" style="background-color: white">
+        <a href=”#” onClick="javascript :history.go(-1);return false">返回上一页</a>
+
+    </div>
+    <div class="panel-body">
+        <form class="navbar-form navbar-left" action="/choice/checkAnswer" method="post">
+        <ol class="sj">
+            <li th:id="${question.id}" th:each="question:${Question}">
+                <h2>[[${question.content}]]</h2>
+                <div class="checkbox">
+                    <input type="checkbox" th:value="A" th:name="question" th:text="${question.getChoiceA()}"
+                           th:if="${not #strings.isEmpty(question.getChoiceA())}"><br>
+                    <input type="checkbox" th:value="B" th:name="question" th:text="${question.getChoiceB()}"
+                           th:if="${not #strings.isEmpty(question.getChoiceB())}"><br>
+                    <input type="checkbox" th:value="C" th:name="question" th:text="${question.getChoiceC()}"
+                           th:if="${not #strings.isEmpty(question.getChoiceC())}"><br>
+                    <input type="checkbox" th:value="D" th:name="question" th:text="${question.getChoiceD()}"
+                           th:if="${not #strings.isEmpty(question.getChoiceD())}"><br>
+                    <input type="checkbox" th:value="E" th:name="question" th:text="${question.getChoiceE()}"
+                           th:if="${not #strings.isEmpty(question.getChoiceE())}"><br>
+                    <input type="checkbox" th:value="F" th:name="question" th:text="${question.getChoiceF()}"
+                           th:if="${not #strings.isEmpty(question.getChoiceF())}"><br>
+                </div>
+                <p></p><br>
+          <!--
+                <p  style="float:right; color: red;"><br></p><br>
+                <p class="form-group"  style="float:right;border: #2aabd2"></p>
+                -->
+            </li>
+
+        </ol>
+            <input  type="button" class="btn btn-default"  value="提交" onclick="show();">
+            <p id="result" style="float: right"></p>
+        </form>
+    </div>
+</div>
+<div class="sidebar-footer">
+    <div th:include="com/footer :: common_footer"></div>
+</div>
+<!---->
+<script>
+    function show(){
+        function ObjDate(key,value) {
+            this.TiHao = key;
+            this.XuanXiang = value;
+        }
+        var array = []
+        $(".sj li").each(function () {
+            var val = new Array()
+            var key = $(this).attr("id");
+            var xuan = $(this).children("div");
+            xuan.each(function () {//z
+                var qu = $(this).children("input")
+                qu.each(function () {
+                    if ($(this).is(':checked'))
+                    {
+                     //   alert($(this).attr("value"))
+                        val.push($(this).attr("value"))
+                    }
+                })
+                var s = new ObjDate(key,val)
+                array.push(s)
+           //     console.log(val)
+            })
+        })
+        var postData = JSON.stringify(array)
+        console.log(postData)
+        $.ajax({
+            type: "post", // 以post方式发起请求
+            url: "/choice/checkAnswer", // 你的请求链接
+            data: {postData:postData},
+            success(data) {
+              //  console.log(data)
+                //比较data和postData的值
+                var True =0;
+                var Flase = 0;
+                var dataJson = JSON.parse(data);//把json数组转成json，后台穿过来的也是数组
+            //    console.log(dataJson[0].answer);
+                var postDataJson = JSON.parse(postData);
+          //      console.log(postDataJson[0].XuanXiang.toString())
+                for (var i=0;i<dataJson.length;i++){
+              //      console.log(dataJson[i].answer)
+             //       console.log(postDataJson[i].XuanXiang.toString())
+                    if (dataJson[i].answer == postDataJson[i].XuanXiang.toString()){
+                        var li = document.getElementById(dataJson[i].num);
+                        var p = li.getElementsByTagName("p")
+                        var code = '<p  style="float:right; color: #4cae4c;">'+'正确'+'<br></p>'
+                        p[0].innerHTML= code;
+                        True += 1;
+                        console.log(dataJson[i].num+"正确")
+                    }else{
+                        var li = document.getElementById(dataJson[i].num);
+                        var p = li.getElementsByTagName("p")
+                        var code = '<p  style="float:right; color: red;">'+'错误'+'</p>'+'正确答案：'+ dataJson[i].answer;
+                        p[0].innerHTML= code
+                        Flase += 1;
+                        console.log("错误，正确答案为："+dataJson[i].answer)
+                    }
+                }
+                document.getElementById("result").innerText = "正确："+True+"错误："+Flase;
+             //   console.log("正确："+True+"错误："+Flase)
+            }
+        })
+    }
+
+
+</script>
+</body>
+</html>
