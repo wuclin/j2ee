@@ -11,4 +11,6 @@ public interface StudentMapper {
     Student checkoutPassword(@Param("password") String password);
 
     Student checkoutAdmin(@Param("username") String username, @Param("password") String password);
+
+    Integer findIdByUserName(@Param("username") String userName);
 }

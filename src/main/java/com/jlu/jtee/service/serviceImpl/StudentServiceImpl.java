@@ -29,4 +29,9 @@ public class StudentServiceImpl implements StudentService {
     public Student checkoutAdmin(String username, String password) {
         return studentMapper.checkoutAdmin(username, password);
     }
+
+    @Override
+    public Integer findIdByUserName(String userName) {
+        return studentMapper.findIdByUserName(userName);
+    }
 }

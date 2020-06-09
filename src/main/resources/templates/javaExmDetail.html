@@ -37,14 +37,10 @@
                            th:if="${not #strings.isEmpty(question.getChoiceF())}"><br>
                 </div>
                 <p></p><br>
-          <!--
-                <p  style="float:right; color: red;"><br></p><br>
-                <p class="form-group"  style="float:right;border: #2aabd2"></p>
-                -->
             </li>
 
         </ol>
-            <input  type="button" class="btn btn-default"  value="提交" onclick="show();">
+            <input id="sumbitInput" type="button" class="btn btn-default"  value="提交" onclick="show();">
             <p id="result" style="float: right"></p>
         </form>
     </div>
@@ -79,7 +75,7 @@
             })
         })
         var postData = JSON.stringify(array)
-        console.log(postData)
+       // console.log(postData)
         $.ajax({
             type: "post", // 以post方式发起请求
             url: "/choice/checkAnswer", // 你的请求链接
@@ -114,6 +110,39 @@
                 }
                 document.getElementById("result").innerText = "正确："+True+"错误："+Flase;
              //   console.log("正确："+True+"错误："+Flase)
+                //把提交按钮隐藏
+                $("#sumbitInput").hide()
+            }
+        })
+    }
+    //因为在关闭页面后 发送不了ajax，所以使用这种方式在退出页面时修改信息
+    window.addEventListener('beforeunload', function(event) {
+        $.ajax({
+            type: "GET",
+            url: "/Exam/BreakoutExam",
+            async: false,
+            success(data){
+                console.log(data)
+            }
+        })
+        console.log('I am the 1st one.');
+    });
+    window.onbeforeunload = function(e) {
+        e = e || window.event;
+        // 兼容IE8和Firefox 4之前的版本
+        if (e) {
+            e.returnValue = '关闭提示';
+        }
+        return '关闭提示......';
+    };
+
+    function storeChange(){
+        $.ajax({
+            type: "GET",
+            url: "/Exam/BreakoutExam",
+            async: false,
+            success(data){
+                console.log(data)
             }
         })
     }

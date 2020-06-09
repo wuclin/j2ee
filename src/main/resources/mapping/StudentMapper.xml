@@ -17,4 +17,8 @@
     <select id="checkoutAdmin" resultType="com.jlu.jtee.domain.Student">
         select * from student where role=1 and username=#{username} and password=#{password}
     </select>
+
+    <select id="findIdByUserName" resultType="int">
+        select id from student where role=0 and username=#{username}
+    </select>
 </mapper>

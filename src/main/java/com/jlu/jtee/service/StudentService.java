@@ -11,4 +11,6 @@ public interface StudentService {
     Student checkoutPassword(String password);
 
     Student checkoutAdmin(String username, String password);
+
+    Integer findIdByUserName(String userName);
 }
