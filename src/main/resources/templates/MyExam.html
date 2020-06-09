@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>java试卷列表</title>
+    <link rel="stylesheet" href="/asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
+    <script src="/asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
+    <script src="/asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
+    <link rel="stylesheet" href="/asserts/css/com.css">
+    <div class="header-main">
+        <div id="head" th:include="com/header :: common_head"></div>
+    </div>
+</head>
+<body>
+<div class="panel panel-default" id="main" style="width: 100%;margin:1% 2% 5% 5%;float: left;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="table-responsive">
+                    <table style="table-layout: fixed" class="table table-striped" >
+                        <thead>
+                        <tr>
+                            <th>考试用户</th>
+                            <th>考试类型</th>
+                            <th>考试时长</th>
+                            <th>考试开始时间</th>
+                            <th>考试结束时间</th>
+                            <th>提交时间</th>
+                            <th>考试情况</th>
+                            <th>考试状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="exam:${exams}">
+                            <td >[[${session.loginUser}]]</td>
+                            <td th:text="${exam.type}"></td>
+                            <td th:text="${exam.scheduledTime}+小时"+></td>
+                            <td th:text="${#dates.format(exam.createTime,'yyyy/dd/MM HH:mm')}"></td>
+                            <td th:text="${#dates.format(exam.endTime,'yyyy/dd/MM HH:mm')}"></td>
+                            <td th:text="${#dates.format(exam.postTime,'yyyy/dd/MM/ HH:mm')}"></td>
+                            <td th:text="${exam.score}"></td>
+                            <td th:text="${exam.status}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--分页-->
+                <div class="row">
+                    <div class="col-md-6" id="page_info_area">
+
+                    </div>
+                    <div class="col-md-6" id="page_nav_area">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="sidebar-footer">
+    <div th:include="com/footer :: common_footer"></div>
+</div>
+</body>
+</html>
+
+
+
+
+
+

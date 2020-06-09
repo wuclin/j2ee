@@ -25,4 +25,9 @@ public class MainController {
     public String toImport(){
         return "import";
     }
+
+    @GetMapping("/MyExam")
+    public String toMyExam(){
+        return "MyExam";
+    }
 }

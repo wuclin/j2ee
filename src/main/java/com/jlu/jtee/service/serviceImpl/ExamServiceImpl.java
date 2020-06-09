@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ExamServiceImpl implements ExamService {
@@ -19,7 +20,12 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public void updateExam(int status, String score, Date postTime,int sId) {
+    public void updateExam(String status, String score, Date postTime,int sId) {
         examMapper.updateExam(status,score,postTime,sId);
+    }
+
+    @Override
+    public List<Exam> findAllMyExamBySId(Integer sId) {
+        return examMapper.findAllMyExamBySId(sId);
     }
 }

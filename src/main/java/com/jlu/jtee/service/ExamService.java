@@ -3,9 +3,12 @@ package com.jlu.jtee.service;
 import com.jlu.jtee.domain.Exam;
 
 import java.util.Date;
+import java.util.List;
 
 public interface ExamService {
     void newExam(Exam exam);
 
-    void updateExam(int status, String score, Date postTime, int sId);
+    void updateExam(String status, String score, Date postTime, int sId);
+
+    List<Exam> findAllMyExamBySId(Integer sId);
 }

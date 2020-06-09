@@ -58,6 +58,7 @@ public class ChoiceQuestionController {
         exam.setEndTime(new Date(date.getTime() + 1*60*60*1000));
         exam.setsId(sId);
         exam.setType(type);
+        exam.setStatus("考试中");
         examService.newExam(exam);
         logger.info("新建考试");
         model.addAttribute("Question",list);
@@ -106,7 +107,7 @@ public class ChoiceQuestionController {
         logger.info("正确："+Tcount+"错误："+Fcount);
        // logger.info(ti.toString());
         //提交后同时修改成绩和考试状态和上交时间
-        int status = 2;
+        String status = "考试结束";
         Date postTime = new Date();
         String score = "正确："+Tcount+"错误："+Fcount;
         String UserName = (String)session.getAttribute("loginUser");

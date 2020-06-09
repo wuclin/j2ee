@@ -10,7 +10,7 @@ public class Exam {
     public Date postTime;
     public String type;
     public String score;
-    public Integer status;
+    public String status;
     public Integer sId;
 
     public Integer getId() {
@@ -69,11 +69,11 @@ public class Exam {
         this.score = score;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
