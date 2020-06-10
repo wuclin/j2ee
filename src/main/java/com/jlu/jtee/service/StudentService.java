@@ -13,4 +13,10 @@ public interface StudentService {
     Student checkoutAdmin(String username, String password);
 
     Integer findIdByUserName(String userName);
+
+    void insertStudent(String username, String password);
+
+    Student checkoutUser(String username, String password);
+
+    void updateFaceId(String purl,Integer id);
 }

@@ -34,4 +34,19 @@ public class StudentServiceImpl implements StudentService {
     public Integer findIdByUserName(String userName) {
         return studentMapper.findIdByUserName(userName);
     }
+
+    @Override
+    public void insertStudent(String username, String password) {
+        studentMapper.insertStudent(username, password);
+    }
+
+    @Override
+    public Student checkoutUser(String username, String password) {
+        return studentMapper.checkoutUser(username, password);
+    }
+
+    @Override
+    public void updateFaceId(String purl, Integer id) {
+        studentMapper.updateFaceId(purl,id);
+    }
 }

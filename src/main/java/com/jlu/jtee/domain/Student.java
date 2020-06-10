@@ -4,6 +4,15 @@ public class Student {
     private Integer id;
     private String userName;
     private String passWord;
+    private String faceID;
+
+    public String getFaceID() {
+        return faceID;
+    }
+
+    public void setFaceID(String faceID) {
+        this.faceID = faceID;
+    }
 
     public Integer getId() {
         return id;

@@ -11,7 +11,7 @@
     </select>
 
     <select id="checkoutPassword" resultType="com.jlu.jtee.domain.Student">
-        select * from student where password=#{password} and role=0
+        select * from student where password=#{password}
     </select>
 
     <select id="checkoutAdmin" resultType="com.jlu.jtee.domain.Student">
@@ -21,4 +21,17 @@
     <select id="findIdByUserName" resultType="int">
         select id from student where role=0 and username=#{username}
     </select>
+
+    <insert id="insertStudent" >
+         insert into student (username,password)
+        values (#{username},#{password})
+    </insert>
+
+    <select id="checkoutUser" resultType="com.jlu.jtee.domain.Student">
+        select * from student where username=#{username} and password=#{password} and role=0
+    </select>
+
+    <update id="updateFaceId">
+        update student set face_id = #{purl} where id=#{id}
+    </update>
 </mapper>

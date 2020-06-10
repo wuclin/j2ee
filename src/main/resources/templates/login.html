@@ -34,6 +34,7 @@
 			return bln;
 		}
 
+
 	   </script>
 <!-- //js -->
 </head>
@@ -79,17 +80,22 @@
 						<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
 							<div class="login-top sign-top">
 								<div class="agileits-login">
-									<form action="#" method="post">
-										<input type="text" name="Username" placeholder="用户名" required="">
-										<input type="text" class="email" name="Email" placeholder="邮箱" required=""/>
-										<input type="password" class="password" name="Password" placeholder="密码" required=""/>
+									<form action="/Student/signUp" method="post">
+										<input type="text" id="username" name="username" placeholder="用户名" required=""><br>
+										<span style="color: aliceblue" id="usernameInfo"></span>
+										<input type="password" id="pwd" class="password" name="password" placeholder="密码" required=""/>
 										<label class="anim">
 											<input type="checkbox" class="checkbox" id="checkRegister">
-											<span> I accept the terms of use</span> 
-										</label> 
+											<span>点击确认注册</span>
+										</label>
+										<!--
+										<a href="/Student/getPhoto">点击拍照</a>
+
+										<button style="float: right" class="btn-default" id="photo">上传照片</button>
+										-->
 										<div class="w3ls-submit">
 											<div class="submit-text">
-												<input class="register" type="submit" value="注册" onclick="return checkoutForm(this.form)" />
+												<input class="register" type="submit" value="注册" onclick="return checkoutForm(this.form)&&checkoutf1f2()" />
 											</div>	
 										</div>
 									</form> 
@@ -102,6 +108,54 @@
 			</div>  
 		</div>
 	</div>	
-	<!-- //main --> 
+	<!-- //main -->
+	<script>
+		var f1 = false;
+		var f2 = false;
+		$("#username").blur(function () {
+			$.ajax({
+				url: "/Student/checkUserName",
+				type: "GET",
+				dataType: "json",
+				data:{username:$("#username").val()},
+				async:true,
+				success:function (data) {
+					if (data == 1){
+						$("#username").css("border-color", "red");
+						$("#usernameInfo").html("用户名已被使用");
+						f1 = false;
+						$("#photo").attr("disabled","disabled");
+					}else if(data == 0 && $("#username").val()!=''){
+						$("#usernameInfo").html("");
+						f1 = true;
+					}
+					if (f2&&f1) {
+						$("#photo").removeAttr("disabled");
+					}	}
+			})
+		})
+		$("#pwd").blur(function () {
+			if ($("#pwd").val() != "" && $("#pwd").val() != null)
+				f2 = true;
+			if (f2&&f1){
+				$("#photo").removeAttr("disabled");
+			}
+		})
+		function checkoutf1f2() {
+			var bln = false;
+			if (f1&&f2)
+				bln = true;
+			else
+				alert("请填写好信息")
+			return bln;
+		}
+
+
+		$(function(){
+			$("#photo").click(function(){
+				window.open('photo.html', '_blank', 'height=400, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no')
+			})
+		})
+	</script>
 </body>
 </html>

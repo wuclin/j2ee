@@ -19,13 +19,14 @@ public class MVCconfig implements WebMvcConfigurer {
                 registry.addViewController("/index.html").setViewName("login");
                 registry.addViewController("/main.html").setViewName("home");
                 registry.addViewController("/import.html").setViewName("import");
-             //   registry.addViewController("/java.html").setViewName("java");
+                registry.addViewController("/photo.html").setViewName("photo");
             }
 
             @Override
             public void addInterceptors(InterceptorRegistry interceptorRegistry){
                 interceptorRegistry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").
-                        excludePathPatterns("/index.html","/","/Student/login","/asserts/**");
+                        excludePathPatterns("/index.html","/","/Student/login","/asserts/**","/Student/getPhoto",
+                                "/Student/getFace","/photo.html","/Student/checkUserName","/Student/signUp");
             }
         };
         return webMvcConfigurer;

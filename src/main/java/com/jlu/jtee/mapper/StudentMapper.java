@@ -13,4 +13,10 @@ public interface StudentMapper {
     Student checkoutAdmin(@Param("username") String username, @Param("password") String password);
 
     Integer findIdByUserName(@Param("username") String userName);
+
+    void insertStudent(@Param("username") String username, @Param("password") String password);
+
+    Student checkoutUser(@Param("username") String username,@Param("password") String password);
+
+    void updateFaceId(@Param("purl") String purl,@Param("id")Integer id);
 }
