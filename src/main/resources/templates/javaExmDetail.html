@@ -125,7 +125,6 @@
                 console.log(data)
             }
         })
-        console.log('I am the 1st one.');
     });
     window.onbeforeunload = function(e) {
         e = e || window.event;
@@ -136,16 +135,6 @@
         return '关闭提示......';
     };
 
-    function storeChange(){
-        $.ajax({
-            type: "GET",
-            url: "/Exam/BreakoutExam",
-            async: false,
-            success(data){
-                console.log(data)
-            }
-        })
-    }
 
 
 </script>

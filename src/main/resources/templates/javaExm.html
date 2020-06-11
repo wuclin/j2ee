@@ -25,7 +25,7 @@
                     <hr>
                     <ul class="list-group" style="font-size: x-large">
                         <li th:each="type:${TypeList}" class="list-group-item">
-                            <a th:href="@{'/choice/getListByType?type='+${type}}">[[${type}]]</a>
+                            <a class="exam"  th:href="@{'/choice/getListByType?type='+${type}}">[[${type}]]</a>
                         </li>
                     </ul>
 
@@ -40,5 +40,25 @@
 <div class="sidebar-footer">
     <div th:include="com/footer :: common_footer"></div>
 </div>
+<script>
+    window.addEventListener('beforeunload', function(event) {
+        $.ajax({
+            type: "GET",
+            url: "/outExam",
+            async: false,
+            success(data){
+                alert(data)
+            }
+        })
+    });
+    window.onbeforeunload = function(e) {
+        e = e || window.event;
+        // 兼容IE8和Firefox 4之前的版本
+        if (e) {
+            e.returnValue = '关闭提示';
+        }
+        return '关闭提示......';
+    };
+</script>
 </body>
 </html>

@@ -6,13 +6,13 @@
             <nav class="navbar navbar-default" role="navigation" style="background-color: white">
                 <div class="container-fluid" style="margin-left: 10%">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="/">学习教育网站</a>
+                        <a class="navbar-brand" href="/main">学习教育网站</a>
                     </div>
                     <div>
                         <!--向左对齐-->
                         <ul class="nav navbar-nav navbar-right">
 
-                            <li><a href="/tab/play">签到</a></li>
+                            <li><a href="#">签到</a></li>
                             <li><a href="/Exam/findAllMyExam">考试</a></li>
                         </ul>
 
@@ -26,7 +26,7 @@
 
                             <li>
                                 <p class="navbar-text" th:if="${session.flag == 1}"><a href="/import" data-toggle="modal" >上传试卷</a></p>
-                                <p class="navbar-text" th:if="${session.flag == 0}"><a href="/edit" >修改资料</a></p>
+                                <p class="navbar-text" th:if="${session.flag == 0}"><a href="/editFace" >修改资料</a></p>
                             </li>
                         </ul>
                     </div>

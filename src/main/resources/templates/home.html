@@ -46,7 +46,7 @@
                                         <div class="caption">
                                             <h3>JAVA</h3>
                                             <p><a href="/java" class="btn btn-primary" role="button">进入学习</a>
-                                                <a href="/choice/getTypelist" class="btn btn-default" role="button">查看相关考试</a></p>
+                                                <a href="/choice/getTypelist" class="Exam btn btn-default" role="button" onclick="return checkFace();">查看相关考试</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -92,5 +92,26 @@
 <div class="sidebar-footer">
     <div th:include="com/footer :: common_footer"></div>
 </div>
+<script>
+    var c = false;
+    function checkFace(){
+        $.ajax({
+            type:"GET",
+            url: "/checkFace",
+            async:false,
+            success:function(data){
+                if (data==0) {
+                    alert("请先前往人脸认证")
+                    window.open ("photo.html", "newwindow", "height=100, width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no")
+                }else if (data==1){
+                    c = true;
+                }
+            }
+        })
+
+        return c;
+    }
+
+</script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package com.jlu.jtee.controller;
 
-import com.jlu.jtee.domain.Student;
 import com.jlu.jtee.service.StudentService;
 import com.jlu.jtee.util.Base64Util;
 import com.jlu.jtee.util.FaceUtil;
@@ -12,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
+
+import static com.jlu.jtee.util.FaceUtil.compare_image;
 
 @Controller
 @RequestMapping("/Student")
@@ -61,14 +61,17 @@ public class StudentController {
         return studentService.sel(id).toString();
     }
 
+    /*修改资料或注册是保存的图片原本
+    * */
     @PostMapping("getPhoto")
     @ResponseBody
     public String GetPhoto(HttpServletRequest request,HttpSession session) {
         String username = "";
         String message = "";
+        String type = "faceOrigin";
         if (session.getAttribute("signUpUN") != null)//注册时使用
             username = (String)session.getAttribute("signUpUN");
-        if (session.getAttribute("loginUser") != null)//注册时使用
+        if (session.getAttribute("loginUser") != null)//登录时使用
             username = (String)session.getAttribute("loginUser");
 
         String url = request.getParameter("imageData");//服务器拿到的base64带有前缀
@@ -85,7 +88,7 @@ public class StudentController {
         base64Util.generateImage(Purl,"D:\\face\\faceOrigin\\"+username+"\\"+username+"1.png");
         //识别是否是人脸
         FaceUtil faceUtil = new FaceUtil();
-        if (faceUtil.face(username)){
+        if (faceUtil.face(type,username)){
             message = "识别成功";
             studentService.updateFaceId("D:\\face\\faceOrigin\\"+username+"\\"+username+"1.png",studentService.findIdByUserName(username));
         }
@@ -95,13 +98,53 @@ public class StudentController {
         return message;
     }
 
-    @GetMapping("getFace")
+    /**
+     * 加入考试时，进行需要进行人脸识别，判断是否是本人
+     * @return
+     */
+    @PostMapping("getFace")
     @ResponseBody
-    public String GetFace(){
-        FaceUtil faceUtil = new FaceUtil();
-         faceUtil.getVideoFromCamera();
+    public int GetFace(HttpServletRequest request,HttpSession session){
+        String username = "";
+        int message = 11;
+        String type = "faceCheck";
+        if (session.getAttribute("loginUser") != null)//登录时使用
+            username = (String)session.getAttribute("loginUser");
 
-         return "photo";
+        String url = request.getParameter("imageData");//服务器拿到的base64带有前缀
+        String Purl = url.substring(url.indexOf(",")+1);//去掉前缀
+        Base64Util base64Util = new Base64Util();
+
+        //如果存放原本的文件夹不存在则直接返回 提示用户先去录入照片
+        File file1 = new File("D:\\face\\faceOrigin\\"+username);
+        if  (!file1 .exists()  && !file1 .isDirectory()){
+            message = 0;//"请先前往修改资料处拍摄照片";
+            return message;
+        }
+        //保存拍摄的照片到本地
+        //新建文件夹
+        File file = new File("D:\\face\\faceCheck\\"+username);
+        if  (!file .exists()  && !file .isDirectory()){
+            file .mkdir();
+        }
+
+        base64Util.generateImage(Purl,"D:\\face\\faceCheck\\"+username+"\\"+username+"1.png");
+        FaceUtil faceUtil = new FaceUtil();
+        if (faceUtil.face(type,username)) {
+            //把要对比图片的地址传进去
+            double like = faceUtil.compare_image("D:\\face\\faceOrigin\\"+username+"\\"+username+"1.png","D:\\face\\faceCheck\\"+username+"\\"+username+"1.png");
+            System.out.println(like);
+            if (like > 0.72) {
+                message = 2;//"人脸匹配";
+                session.setAttribute("entryExam",1);//匹配成功，保存识别成功标识
+            } else {
+                message = 3;//"人脸不匹配";
+            }
+        }else {
+
+            message = 1;//提示用户识别不到人像
+        }
+        return message;
     }
 
     @GetMapping("checkUserName")

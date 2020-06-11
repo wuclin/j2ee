@@ -114,6 +114,7 @@ public class ChoiceQuestionController {
         Integer sId = studentService.findIdByUserName(UserName);
         examService.updateExam(status,score,postTime,sId);
 
+        session.removeAttribute("entryExam");//离开考试页面后，把人脸识别成功的标识去掉
             return new JsonUtil().serialize(ti);
     }
 }

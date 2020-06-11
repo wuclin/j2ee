@@ -31,7 +31,7 @@ public class FaceUtil {
         // 3- 本地图片人脸识别，识别成功 返回对应信息
      //   face("test3");
     //    face("test4");
-        /**/
+        /*
         // 4- 比对本地2张图的人脸相似度 （越接近1越相似）
         String basePicPath = "D:\\face\\";
 
@@ -41,7 +41,7 @@ public class FaceUtil {
             System.out.println("人脸匹配");
         } else {
             System.out.println("人脸不匹配");
-        }
+        }*/
     }
 
     public static void getVideoFromCamera() {
@@ -100,12 +100,12 @@ public class FaceUtil {
 /*
 * 调用这个查看是否为人像 保存作为主体
 * */
-    public static boolean face(String fileName) {
+    public static boolean face(String type,String fileName) {
         // 1 读取OpenCV自带的人脸识别特征XML文件
         //OpenCV 图像识别库一般位于 opencv\sources\data 下面
 //        CascadeClassifier facebook=new CascadeClassifier("D:\\Sofeware\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml");
         // 2 读取测试图片
-        String imgPath = "D:\\face\\faceOrigin\\"+fileName+"\\"+fileName+"1.png";
+        String imgPath = "D:\\face\\"+type+"\\"+fileName+"\\"+fileName+"1.png";
         Mat image=Imgcodecs.imread(imgPath);
         if(image.empty()){
             System.out.println("image 内容不存在！");
@@ -124,7 +124,7 @@ public class FaceUtil {
                     new Scalar(0, 255, 0), 3);
             i++;
         }
-        Imgcodecs.imwrite("D:\\face\\faceOrigin\\"+fileName+"\\"+fileName+"2.png", image);//把识别为人像的图片写到固定路径
+        Imgcodecs.imwrite("D:\\face\\"+type+"\\"+fileName+"\\"+fileName+"2.png", image);//把识别为人像的图片写到固定路径
         // 6 展示图片
       //  HighGui.imshow("人脸识别", image);
      //   HighGui.waitKey(0);
@@ -143,6 +143,9 @@ public class FaceUtil {
     public static double compare_image(String img_1, String img_2) {
         Mat mat_1 = conv_Mat(img_1);
         Mat mat_2 = conv_Mat(img_2);
+
+
+
         Mat hist_1 = new Mat();
         Mat hist_2 = new Mat();
 
@@ -159,19 +162,22 @@ public class FaceUtil {
         return res;
     }
 
-    public static Mat conv_Mat(String img) {
-        Mat image0 = Imgcodecs.imread(img);
+    private static Mat conv_Mat(String img_1) {
+        Mat image0 = Imgcodecs.imread(img_1);
 
-        Mat image1 = new Mat();
-        // 灰度化
-        Imgproc.cvtColor(image0, image1, Imgproc.COLOR_BGR2GRAY);
-        // 探测人脸
+        Mat image = new Mat();
+        //灰度转换
+        Imgproc.cvtColor(image0, image, Imgproc.COLOR_BGR2GRAY);
+
         MatOfRect faceDetections = new MatOfRect();
-        faceDetector.detectMultiScale(image1, faceDetections);
-        // rect中人脸图片的范围
+        //探测人脸
+        faceDetector.detectMultiScale(image, faceDetections);
+
+        // rect中是人脸图片的范围
         for (Rect rect : faceDetections.toArray()) {
-            Mat face = new Mat(image1, rect);
-            return face;
+            //切割rect人脸
+            Mat mat = new Mat(image, rect);
+            return mat;
         }
         return null;
     }

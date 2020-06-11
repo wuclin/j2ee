@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>修改资料页面</title>
+    <link rel="stylesheet" href="/asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
+    <script src="/asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
+    <script src="/asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
+    <link rel="stylesheet" href="/asserts/css/com.css">
+    <div class="header-main">
+        <div id="head" th:include="com/header :: common_head"></div>
+    </div>
 </head>
 <body>
+<div class="panel panel-default" id="main" style="width: 80%;margin:1% 2% 5% 5%;float: left;">
+    <div class="panel-heading" style="background-color: white">
+        <a href=”#” onClick="javascript :history.go(-1);return false">返回上一页</a>
+
+    </div>
+    <div class="panel-body">
+            <a href="photo.html">照片修改</a>
+    </div>
+</div>
+<div class="sidebar-footer">
+    <div th:include="com/footer :: common_footer"></div>
+</div>
+<!---->
 
 </body>
 </html>

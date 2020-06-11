@@ -11,8 +11,6 @@ import org.opencv.videoio.Videoio;
 
 import java.util.Arrays;
 
-import static org.opencv.videoio.Videoio.CAP_DSHOW;
-
 /**
  *
  * @Title: Opencv 图片人脸识别、实时摄像头人脸识别、视频文件人脸识别
@@ -35,24 +33,23 @@ public class FaceVideo {
 
     public static void main(String[] args) {
         // 1- 从摄像头实时人脸识别，识别成功保存图片到本地
-      //  getVideoFromCamera();
+  //      getVideoFromCamera();
 
         // 2- 从本地视频文件中识别人脸
 //        getVideoFromFile();
 
         // 3- 本地图片人脸识别，识别成功并保存人脸图片到本地
-        face();
-        /*
-        // 4- 比对本地2张图的人脸相似度 （越接近1越相似）
-       String basePicPath = "D:\\face\\";
+    //    face();
 
-       double compareHist = compare_image(basePicPath + "test3.png", basePicPath + "test4.jpg");
+        // 4- 比对本地2张图的人脸相似度 （越接近1越相似）
+        String basePicPath = "D:\\face\\";
+        double compareHist = compare_image(basePicPath + "1.jpg", basePicPath + "2.jpg");
         System.out.println(compareHist);
         if (compareHist > 0.72) {
-           System.out.println("人脸匹配");
+            System.out.println("人脸匹配");
         } else {
             System.out.println("人脸不匹配");
-        }*/
+        }
     }
 
 
@@ -65,7 +62,7 @@ public class FaceVideo {
      */
     public static void getVideoFromCamera() {
         //1 如果要从摄像头获取视频 则要在 VideoCapture 的构造方法写 0
-        VideoCapture capture=new VideoCapture(0,CAP_DSHOW);
+        VideoCapture capture=new VideoCapture(0);
         Mat video=new Mat();
         int index=0;
         if (capture.isOpened()) {
@@ -83,7 +80,7 @@ public class FaceVideo {
         }
         try {
             capture.release();
-            Thread.sleep(10000);
+            Thread.sleep(1000);
             System.exit(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -144,7 +141,7 @@ public class FaceVideo {
             }
             i++;
             if(i==3) {// 获取匹配成功第10次的照片
-                Imgcodecs.imwrite("D:\\face\\" +"face3.png", image);
+                Imgcodecs.imwrite("D:\\Documents\\Pictures\\" + "face.png", image);
             }
         }
         return image;
@@ -162,7 +159,7 @@ public class FaceVideo {
         //OpenCV 图像识别库一般位于 opencv\sources\data 下面
 //        CascadeClassifier facebook=new CascadeClassifier("D:\\Sofeware\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml");
         // 2 读取测试图片
-        String imgPath = "D:\\face\\2.jpg";
+        String imgPath = "D:\\Documents\\Pictures\\he.png";
         Mat image=Imgcodecs.imread(imgPath);
         if(image.empty()){
             System.out.println("image 内容不存在！");
@@ -179,11 +176,10 @@ public class FaceVideo {
         for (Rect rect : face.toArray()) {
             Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
                     new Scalar(0, 255, 0), 3);
-            imageCut(imgPath, "D:\\face\\Pictures\\"+i+".png", rect.x, rect.y, rect.width, rect.height);// 进行图片裁剪
+            imageCut(imgPath, "D:\\Documents\\Pictures\\"+i+".jpg", rect.x, rect.y, rect.width, rect.height);// 进行图片裁剪
             i++;
         }
         // 6 展示图片
-        Imgcodecs.imwrite("D:\\face\\" +"jyrlbc.png", image);
         HighGui.imshow("人脸识别", image);
         HighGui.waitKey(0);
     }
@@ -259,29 +255,5 @@ public class FaceVideo {
         return null;
     }
 
-    /**
-     * OpenCV-4.1.1 将摄像头拍摄的视频写入本地
-     * @return: void
-     * @date: 2019年8月19日 17:20:48
-     */
-    public static void writeVideo() {
-        //1 如果要从摄像头获取视频 则要在 VideoCapture 的构造方法写 0
-        VideoCapture capture=new VideoCapture(0);
-        Mat video=new Mat();
-        int index=0;
-        Size size=new Size(capture.get(Videoio.CAP_PROP_FRAME_WIDTH),capture.get(Videoio.CAP_PROP_FRAME_HEIGHT));
-        VideoWriter writer=new VideoWriter("D:/a.mp4",VideoWriter.fourcc('D', 'I', 'V', 'X'), 15.0,size, true);
-        while(capture.isOpened()) {
-            capture.read(video);//2 将摄像头的视频写入 Mat video 中
-            writer.write(video);
-            HighGui.imshow("像头获取视频", video);//3 显示图像
-            index=HighGui.waitKey(100);//4 获取键盘输入
-            if(index==27) {//5 如果是 Esc 则退出
-                capture.release();
-                writer.release();
-                return;
-            }
-        }
-    }
-
 }
+
