@@ -28,11 +28,11 @@ public class FaceUtil {
 
     public static void main(String[] args) {
 
-        // 3- 本地图片人脸识别，识别成功 返回对应信息
+        // 本地图片人脸识别，识别成功 返回对应信息
      //   face("test3");
     //    face("test4");
         /*
-        // 4- 比对本地2张图的人脸相似度 （越接近1越相似）
+        //  比对本地2张图的人脸相似度 （越接近1越相似）
         String basePicPath = "D:\\face\\";
 
         double compareHist = compare_image(basePicPath + "536314915.png", basePicPath + "1369585767.png");

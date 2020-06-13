@@ -1,13 +1,10 @@
 package com.jlu.jtee;
 
-import com.jlu.jtee.util.FaceUtil;
-import com.jlu.jtee.util.FaceVideo;
 import org.junit.Test;
 import sun.misc.BASE64Decoder;
 
 import java.io.IOException;
 
-import static com.jlu.jtee.util.FaceUtil.*;
 public class FaceTest {
 
     @Test
