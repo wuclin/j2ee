@@ -12,8 +12,8 @@
                         <!--向左对齐-->
                         <ul class="nav navbar-nav navbar-right">
 
-                            <li><a href="#">签到</a></li>
-                            <li><a href="/Exam/findAllMyExam">考试</a></li>
+                            <li><a href="#" th:if="${session.flag == 0}">签到</a></li>
+                            <li><a th:if="${session.flag == 0}" href="/Exam/findAllMyExam">考试</a></li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">

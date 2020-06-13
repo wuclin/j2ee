@@ -32,6 +32,6 @@
     </select>
 
     <update id="updateFaceId">
-        update student set face_id = #{purl} where id=#{id}
+        update student set face_id = #{purl} where id=#{id} and role=0
     </update>
 </mapper>

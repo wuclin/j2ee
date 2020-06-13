@@ -86,21 +86,16 @@ public class ChoiceQuestionController {
             int length =  jsonArray.getJSONObject(i).getString("XuanXiang").length();
             List la = new ArrayList();
             List lb = new ArrayList();
-            System.out.println(i+answer);
             for (int j=0;j<answer.length();j++){
                 char b = answer.charAt(j);
                 if (b>='A'&&b<='Z')
                     lb.add(b);
-                 //   System.out.println("答案："+b);
-
             }
             for (int j=0;j<length-1;j++)
             {
                 char a = jsonArray.getJSONObject(i).getString("XuanXiang").charAt(j);
                 if(a>='A'&&a<='Z')
                     la.add(a);
-                //    System.out.println("选项:"+a);
-
             }
 
             if (la.containsAll(lb)){
