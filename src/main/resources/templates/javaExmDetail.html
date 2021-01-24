@@ -52,6 +52,31 @@
 </div>
 <!---->
 <script>
+    $(document).ready(
+        $(function(){
+            alert("chu")
+            $.ajax({
+                //请求方式
+                type : "GET",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //请求地址
+                url : "/Student/UseCamera",
+                //数据，json字符串
+                //请求成功
+                success : function(result) {
+                    console.log(result);
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+        
+    }))
+
+
     function show(){
         function ObjDate(key,value) {
             this.TiHao = key;
@@ -155,8 +180,6 @@
         times --;
     }
     timeObj = window.setInterval(timer,1000);
-
-
 </script>
 </body>
 </html>

@@ -7,11 +7,8 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
-import org.opencv.videoio.VideoWriter;
-import org.opencv.videoio.Videoio;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import static org.opencv.videoio.Videoio.CAP_DSHOW;
 

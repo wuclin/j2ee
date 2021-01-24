@@ -133,7 +133,15 @@
             timeout:10000,
             async: true,
             success(data){
-                alert(data)
+                if (data==1)
+                {
+                    alert("识别成功，可前往登录");
+                    window.location = "/";
+
+                }else if (data==2)
+                {
+                    alert("识别失败，请拍照重试或登录后再进行拍照")
+                }
             }
             /*
             success: function (data) {

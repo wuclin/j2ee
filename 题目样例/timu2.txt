@@ -1,0 +1,74 @@
+！
+######
+***Java基础2
+@@1,Java 中变量不一定要初始化？
+-A. 正确
+-B. 错误
+>>>B
+%
+######
+***Java基础2
+@@2,Java 中一个类可以继承多个类（extends 后面跟上多个类）？
+-A. 正确
+-B. 错误 
+>>>B
+%
+######
+***Java基础2
+@@3,Math.round(3.7) 输出结果为？
+-A. 4
+-B. 3.7
+-C. 3
+-D. 0 
+>>>A
+%
+######
+***Java基础2
+@@3,Java 支持 goto 关键字吗？
+-A. 支持
+-B. 不支持
+>>>B
+%
+######
+***Java基础2
+@@4,线程结束后可以重新 start 吗？
+-A. 可以
+-B. 不可以
+>>>B
+%
+######
+***Java基础2
+@@5,实现 Runnable 接口，必须重写 Runnable 的哪个方法？
+-A. start()
+-B. sleep()
+-C. run()
+-D. wait() 
+>>>C
+%
+######
+***Java基础2
+@@6,所有异常类的基类是？
+-A. Java.throwable
+-B. Java.Lang.throwable
+-C. Java.Lang.Exception
+-D. Java.Lang.throwables 
+>>>B
+%
+######
+***Java基础2
+@@8,下面的说法正确的是()。？
+-A. Java 语言是面向对象的、解释执行的网络编程语言。
+-B. Java 语言具有可移植性，是与平台无关的编程语言。
+-C. Java 语言可对内存垃圾自动收集。
+-D. Java 语言编写的程序虽然是“一次编译，到处运行”，但必须要java的运行环境。 
+>>>A,B,C,D
+%
+######
+***Java基础2
+@@9,下面哪几段代码不会出现编译错误？
+-A. int i=0; if (i) { System.out.println(“Hi”); }
+-B. boolean b=true; boolean b2=true; if(b==b2) { System.out.println(“So true”); }
+-C. int i=1; int j=2; if(i==1|| j==2) System.out.println(“OK”);
+-D. int i=1; int j=2; if (i==1 &| j==2) System.out.println(“OK”); 
+>>>B,C
+%

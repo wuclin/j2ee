@@ -2,6 +2,7 @@ package com.jlu.jtee.controller;
 
 import com.jlu.jtee.service.StudentService;
 import com.jlu.jtee.util.Base64Util;
+import com.jlu.jtee.util.Camera;
 import com.jlu.jtee.util.FaceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import static com.jlu.jtee.util.FaceUtil.compare_image;
@@ -65,9 +68,9 @@ public class StudentController {
     * */
     @PostMapping("getPhoto")
     @ResponseBody
-    public String GetPhoto(HttpServletRequest request,HttpSession session) {
+    public int GetPhoto(HttpServletRequest request,HttpSession session) {
         String username = "";
-        String message = "";
+        int message = 00;
         String type = "faceOrigin";
         if (session.getAttribute("signUpUN") != null)//注册时使用
             username = (String)session.getAttribute("signUpUN");
@@ -89,11 +92,11 @@ public class StudentController {
         //识别是否是人脸
         FaceUtil faceUtil = new FaceUtil();
         if (faceUtil.face(type,username)){
-            message = "识别成功";
+            message = 1;
             studentService.updateFaceId("D:\\face\\faceOrigin\\"+username+"\\"+username+"1.png",studentService.findIdByUserName(username));
         }
         else
-            message = "识别失败请拍照重试，或登录后重新拍照";
+            message = 2;
 
         return message;
     }
@@ -172,6 +175,17 @@ public class StudentController {
       //注册成功后把注册的用户名存在session中，如果想在注册的时候拍摄照片可以使用
       session.setAttribute("signUpUN",username);
         return "photo";
+    }
 
+    //要把用户名传进去
+    @ResponseBody
+    @GetMapping("UseCamera")
+    public void useCamera(HttpSession session) throws InterruptedException, IOException {
+        String username = "", ExamType = "";
+        username = (String)session.getAttribute("loginUser");
+        ExamType = (String)session.getAttribute("ExamType");
+        Camera camera = new Camera(username,ExamType);
+
+      //  return 1;
     }
 }

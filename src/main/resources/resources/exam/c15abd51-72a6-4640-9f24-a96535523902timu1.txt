@@ -1,0 +1,91 @@
+！
+######
+***Java基础
+@@1,boolean 类型的默认值为？
+-A. true
+-B. false
+-C. null
+-D. 未定义 
+>>>B
+%
+######
+***Java基础
+@@2,以下哪个单词不是 Java 的关键字？
+-A．static               
+-B．Boolean 
+-C．void                 
+-D．private
+>>>B
+%
+######
+***Java基础
+@@3,java main 函数写法正确的是？
+-A．public static void main() 
+-B．public void main(String[] args)
+-C．public static void main(String[] args)
+-D．static void main(String[] args)
+>>>C
+%
+######
+***Java基础
+@@4,以下语句哪个是访问数组 arrOne 的第一个元素？
+-A．arrOne[0] 
+-B．arrOne[1]
+-C．arrOne[2]
+-D．arrOne[3]
+>>>A
+%
+######
+***Java基础
+@@5,float 变量的默认值为？
+-A．0.0d 
+-B．0.0f
+-C．0
+-D．未定义
+>>>B
+%
+######
+***Java基础
+@@6,以下初始化 Java 数组的代码哪一个是正确的。
+-A．int [] myArray = {"1", "2", "3"}; 
+-B．int [] myArray = (5, 4, 3);
+-C．int myArray [] [] = {1,2,3,4};
+-D．int myArray [] = {1, 3, 5};
+>>>D
+%
+######
+***Java基础
+@@7,以下哪个类可以访问所有（子类与超类）的 public 和 protected 方法 ?？
+-A．内部类 
+-B．外部类
+-C．子类
+-D．超类
+>>>C
+%
+######
+***Java基础
+@@8,哪个修饰符定义了方法与属性只能在同一个类中访问？
+-A．Pubilc
+-B．Protected
+-C．Default
+-D．Private
+>>>D
+%
+######
+***Java基础
+@@9,Java 中 float 类型的在内存中的大小为多少字节？
+-A．8
+-B．4
+-C．2
+-D．16
+>>>B
+%
+######
+***Java基础
+@@10,下列哪些方法是ArrayList和LinkedList集合中都定义的（多选）？
+-A．add(Object o)
+-B．removeFirst()
+-C．remove(Object o)
+-D．add(int index,Object o) 
+>>>A,C,D
+%

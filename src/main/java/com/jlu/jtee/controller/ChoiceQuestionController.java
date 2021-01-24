@@ -51,6 +51,7 @@ public class ChoiceQuestionController {
     public String getListByType(@RequestParam("type")String type, Model model, HttpSession session){
         List<ChoiceQuestion> list = choiceQuestionService.getListByType(type);
         String UserName = (String)session.getAttribute("loginUser");
+        session.setAttribute("ExamType",type); //把考试科目写进去
         Integer sId = studentService.findIdByUserName(UserName);
         Exam exam = new Exam();
         Date date = new Date();
