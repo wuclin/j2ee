@@ -5,6 +5,9 @@ public class Student {
     private String userName;
     private String passWord;
     private String faceID;
+    private String className;
+    private Integer classID;
+    private Integer privilege;
 
     public String getFaceID() {
         return faceID;
@@ -36,6 +39,30 @@ public class Student {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public Integer getClassID() {
+        return classID;
+    }
+
+    public void setClassID(Integer classID) {
+        this.classID = classID;
+    }
+
+    public Integer getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Integer privilege) {
+        this.privilege = privilege;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public Student(Integer id, String userName, String passWord) {

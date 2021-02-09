@@ -17,8 +17,40 @@
         <a href=”#” onClick="javascript :history.go(-1);return false">返回上一页</a>
 
     </div>
+
     <div class="panel-body">
-            <a href="photo.html">照片修改</a>
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-2">
+                    <p class="form-control-static">[[${session.loginUser}]]</p>
+                </div>
+                <button class="btn btn-danger" id="UserNameCheck">确定</button>
+                <button class="btn btn-warning" id="UserNameEdit">修改</button>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">班级</label>
+                <div class="col-sm-2">
+                    <select class="form-control" id="ClassSelect" disabled="disabled">
+                    </select>
+                </div>
+                <button class="btn btn-danger" id="ClassCheck">确定</button>
+                <button class="btn btn-warning" id="ClassEdit">修改</button>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">权限</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" id="Pior">未选择班级</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a href="photo.html" class="btn btn-primary">照片修改</a>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 <div class="sidebar-footer">
@@ -27,4 +59,47 @@
 <!---->
 
 </body>
+<SCRIPT>
+    $(document).ready(function () {
+        $("#ClassCheck").click(function () {
+            alert("锁定");
+            $("#ClassSelect").attr("disabled","disabled");
+            $("#Pior").html("可参加考试")
+            var ClassName = $("#ClassSelect").val();
+            $.ajax({
+                url : "/setClass",
+                type : 'get',
+                data : {
+                    ClassName : ClassName
+                }
+            })
+        })
+        $("#ClassEdit").click(function () {
+            alert("解锁");
+            $("#ClassSelect").removeAttr("disabled");
+        })
+        $("#UserNameEdit").click(function () {
+            alert("修改名字");
+        })
+    })
+
+
+        $.ajax({
+            url : "/getClassName",
+            type : 'get',
+            dataType : 'json',
+            success : function(data) {
+                if (data){
+                    var Class_sel = [];
+                    Class_sel.push('<option value="" selected>请选择</option>')
+                    for(var i=0,len=data.length;i<len;i++){
+                        var Class = data[i];
+                        Class_sel.push('<option value="'+Class+'">'+Class+'</option>');
+                    }
+                    $("#ClassSelect").html(Class_sel.join(' '));
+                }
+            }
+        })
+
+</SCRIPT>
 </html>
