@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -185,7 +184,17 @@ public class StudentController {
         username = (String)session.getAttribute("loginUser");
         ExamType = (String)session.getAttribute("ExamType");
         Camera camera = new Camera(username,ExamType);
-
       //  return 1;
+    }
+
+    @GetMapping("/checkP")
+    @ResponseBody
+    public int toCheckP(HttpSession session ){
+        String username = "";
+        username = (String)session.getAttribute("loginUser");
+        if (studentService.toCheckP(username) !=0)
+            return 1;//验证成功
+        else return 0;
+
     }
 }

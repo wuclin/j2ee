@@ -1,6 +1,7 @@
 package com.jlu.jtee.controller;
 
 import com.jlu.jtee.service.ClassRoomService;
+import com.jlu.jtee.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,17 @@ public class ClassRoomController {
     @Autowired
     ClassRoomService classRoomService;
 
+    @Autowired
+    StudentService studentService;
+
     @ResponseBody
     @GetMapping("/getClassName")
-    public List GetClassName(){
+    public List GetClassName(HttpSession session){
         List<String> ClassName = new ArrayList<>();
+        String UserName = (String)session.getAttribute("loginUser");
+        String Classname = studentService.getClassName(UserName);
+        if (Classname != null)
+            return null;
         ClassName = classRoomService.SelectClassRoomName();
         return ClassName;
     }

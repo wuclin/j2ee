@@ -49,4 +49,14 @@ public class StudentServiceImpl implements StudentService {
     public void updateFaceId(String purl, Integer id) {
         studentMapper.updateFaceId(purl,id);
     }
+
+    @Override
+    public int toCheckP(String username) {
+        return studentMapper.toCheckP(username);
+    }
+
+    @Override
+    public String getClassName(String username) {
+        return studentMapper.getClassName(username);
+    }
 }

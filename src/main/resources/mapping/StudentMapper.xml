@@ -34,4 +34,12 @@
     <update id="updateFaceId">
         update student set face_id = #{purl} where id=#{id} and role=0
     </update>
+
+    <select id="toCheckP" resultType="int">
+        select privilege from student where username=#{username} and role=0
+    </select>
+
+    <select id="getClassName" resultType="string">
+        select classname from student where username=#{username} and role=0
+    </select>
 </mapper>

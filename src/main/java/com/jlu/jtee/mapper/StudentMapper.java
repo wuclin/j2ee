@@ -19,4 +19,8 @@ public interface StudentMapper {
     Student checkoutUser(@Param("username") String username,@Param("password") String password);
 
     void updateFaceId(@Param("purl") String purl,@Param("id")Integer id);
+
+    int toCheckP(@Param("username") String username);
+
+    String getClassName(@Param("username") String username);
 }

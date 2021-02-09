@@ -1,5 +1,7 @@
 package com.jlu.jtee.controller;
 
+import com.jlu.jtee.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -8,6 +10,10 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    StudentService studentService;
+
 
     @GetMapping("/java")
     public String toJavaPage(){
@@ -54,6 +60,13 @@ public class MainController {
     @GetMapping("/editFace")
     public String toEditFace(HttpSession session){
         session.removeAttribute("check");
+        String username = (String)session.getAttribute("loginUser");
+        String className = studentService.getClassName(username);
+        if (className != null){
+            session.setAttribute("className",className);
+            session.setAttribute("Nameflag",1);
+        }
+
         return "edit";
     }
 

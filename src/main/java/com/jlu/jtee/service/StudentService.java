@@ -19,4 +19,8 @@ public interface StudentService {
     Student checkoutUser(String username, String password);
 
     void updateFaceId(String purl,Integer id);
+
+    int toCheckP(String username);
+
+    String getClassName(String username);
 }

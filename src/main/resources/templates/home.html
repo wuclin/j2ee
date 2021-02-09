@@ -27,7 +27,7 @@
                                         <img src="/asserts/images/d.jpg"  alt="...">
                                         <div class="caption">
                                             <h3>C语言</h3>
-                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default" role="button">查看相关考试</a></p>
+                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default checkClass" role="button">查看相关考试</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                                         <img src="/asserts/images/d.jpg"  alt="...">
                                         <div class="caption">
                                             <h3>C++</h3>
-                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default" role="button">查看相关考试</a></p>
+                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default checkClass" role="button">查看相关考试</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                         <div class="caption">
                                             <h3>JAVA</h3>
                                             <p><a href="/java" class="btn btn-primary" role="button">进入学习</a>
-                                                <a href="/choice/getTypelist" class="Exam btn btn-default" role="button" onclick="return checkFace();">查看相关考试</a></p>
+                                                <a href="/choice/getTypelist" class="Exam btn btn-default checkClass" role="button" onclick="return checkFace();">查看相关考试</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                         <img src="/asserts/images/d.jpg"  alt="...">
                                         <div class="caption">
                                             <h3>PYTHON</h3>
-                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default" role="button">查看相关考试</a></p>
+                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default checkClass" role="button">查看相关考试</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                         <img src="/asserts/images/d.jpg" alt="...">
                                         <div class="caption">
                                             <h3>c#</h3>
-                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default" role="button">查看相关考试</a></p>
+                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default checkClass" role="button">查看相关考试</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                         <img src="/asserts/images/d.jpg" alt="...">
                                         <div class="caption">
                                             <h3>PHP</h3>
-                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default" role="button">查看相关考试</a></p>
+                                            <p><a href="#" class="btn btn-primary" role="button">进入学习</a> <a href="#" class="none btn btn-default checkClass" role="button">查看相关考试</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -94,22 +94,43 @@
 </div>
 <script>
     var c = false;
+    var c2 = false;
     function checkFace(){
+        if (checkClass())
+        {
+            $.ajax({
+                type:"GET",
+                url: "/checkFace",
+                async:false,
+                success:function(data){
+                    if (data==0) {
+                        alert("请先前往人脸认证")
+                        window.open ("photo.html", "newwindow", "height=100, width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no")
+                    }else if (data==1){
+                        c = true;
+                    }
+                }
+            })
+        }
+
+
+        return c;
+    }
+
+    function checkClass(){
         $.ajax({
-            type:"GET",
-            url: "/checkFace",
+            type : "GET",
+            url : "/Student/checkP",
             async:false,
-            success:function(data){
-                if (data==0) {
-                    alert("请先前往人脸认证")
-                    window.open ("photo.html", "newwindow", "height=100, width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no")
-                }else if (data==1){
-                    c = true;
+            success: function(data){
+                if (data == 0){
+                    alert("请先选择班级")
+                }else{
+                    c2 = true;
                 }
             }
         })
-
-        return c;
+        return c2;
     }
 
     $(".none").click(function () {
