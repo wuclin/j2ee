@@ -11,4 +11,6 @@ public interface ExamService {
     void updateExam(String status, String score, Date postTime, int sId);
 
     List<Exam> findAllMyExamBySId(Integer sId);
+
+    List<Exam> getExam(int sid);
 }

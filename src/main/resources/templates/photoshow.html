@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图片展示</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>管理员</title>
+        <link rel="stylesheet" href="asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
+        <script src="asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
+        <script src="asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
+        <link rel="stylesheet" href="asserts/css/com.css">
+        <div class="header-main">
+            <div id="head" th:include="com/header :: common_head"></div>
+        </div>
+    </head>
+</head>
+<body>
+
+<div class="panel panel-default" id="main1" style="width: 80%;margin:1% 2% 1% 5%;float: left;">
+    <div class="panel" style="background-color: white">
+            <input style="margin:1% 2% 2% 2%;"  type="text" id="Exam" placeholder="请输入用户名：">
+            <button class="btn btn-defaultd" id="findExam">查询</button>
+
+    </div>
+</div>
+
+<div class="panel panel-default" id="main2" style="width: 80%;margin:1% 2% 2% 5%;float: left;">
+    <div class="panel" style="background-color: white">
+        <!--这里展示考试科目-->
+        <div class="list-group exam-group"></div>
+    </div>
+</div>
+
+   <div class="panel panel-default" id="main" style="width: 80%;margin:1% 2% 5% 5%;float: left;">
+       <div class="panel-heading" style="background-color: white; height: 5%">
+           <a style="margin-right: 2%">显示</a>
+           <div style="float: right" class="btn-group btn-group-sm">
+               <button type="button" class="btn btn-warning">通过</button>
+               <button type="button" class="btn btn-danger">不通过</button>
+           </div>
+
+       </div>
+       <ul class="list-group" style="width: 100%">
+           <li class="list-group-item">
+               <div style="height: 50px">
+                   <div style="width: 100%;float: right">
+                       <div class="row" id="faceCh">
+
+                       </div>
+                   </div>
+               </div>
+           </li>
+       </ul>
+   </div>
+
+</body>
+<script>
+    $(document).ready(function(){
+        $("#findExam").click(function(){
+            var username = $("#Exam").val();
+            $.ajax({
+                url : "/Exam/getExam",
+                type : 'get',
+                data : {
+                    username : username
+                },
+                dataType : 'json',
+                success : function (data) {
+                    var Exam_sel = [];
+                    for(var i=0,len=data.length;i<len;i++){
+                        var s = data[i].type+data[i].createTime;
+                        Exam_sel.push('<a id="'+ s +'"' + 'class="list-group-item" >' + s + '</a>');
+                    }
+                    $(".exam-group").html(Exam_sel.join(' '));
+                }
+            })
+        })
+    })
+
+    //动态获取
+    $(document).on("click", ".list-group-item", function() {
+        var ExamName = $(this).attr("id");  //文件夹
+
+        var s1 = ExamName.replaceAll("-","").replaceAll(" ","").replaceAll(":","");
+
+        console.log(s1)
+        $.ajax({
+            url : "/Student/getExamFace",
+            type : 'get',
+            data : {
+                ExamName : ExamName
+            },
+            dataType : 'json',
+            success : function (data) {
+                    console.log(data)
+                var Face_sel = [];
+                for(var i=0,len=data.length;i<len;i++){
+                    var s = data[i];  // xx.jpg
+                    Face_sel.push('<div class="col-sm-2 col-md-2" ><div class="thumbnail"><img src="/unit/bill/showeinvoice/' + s1 +'?f='+data[i] +'"></div></div>');
+                }
+                    $("#faceCh").html(Face_sel.join(""))
+            }
+        })
+    });
+
+</script>
+</html>

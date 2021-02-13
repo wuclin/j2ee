@@ -1,10 +1,13 @@
 package com.jlu.jtee.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Exam {
     public Integer id;
     public Integer scheduledTime;
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     public Date createTime;
     public Date endTime;
     public Date postTime;

@@ -48,4 +48,16 @@ public class ExamController {
         model.addAttribute("exams",exams);
         return "MyExam";
     }
+
+
+    @GetMapping("/getExam")
+    @ResponseBody
+    public List GetExam(String username, HttpSession session){
+        int sid = studentService.findIdByUserName(username);
+
+            session.setAttribute("faceName", username);
+
+        List<Exam> Exam = examService.getExam(sid);
+        return Exam;
+    }
 }

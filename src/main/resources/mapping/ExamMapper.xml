@@ -15,4 +15,8 @@
     <select id="findAllMyExamBySId" resultType="com.jlu.jtee.domain.Exam">
         select * from exam where s_id=#{sId}
     </select>
+
+    <select id="getExam" resultType="com.jlu.jtee.domain.Exam">
+        select type,create_time  from exam where s_id=#{sId}
+    </select>
 </mapper>

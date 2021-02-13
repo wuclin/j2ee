@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>没有用的这个html</title>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>管理员</title>
     <link rel="stylesheet" href="asserts/css/bootstrap.css" th:href="@{/asserts/css/bootstrap.css}"/>
     <script src="asserts/js/jquery-3.4.1.min.js" th:src="@{/asserts/js/jquery-3.4.1.min.js}"></script>
     <script src="asserts/js/bootstrap.js" th:src="@{/asserts/js/bootstrap.js}"></script>
@@ -14,9 +16,20 @@
 <body>
 
 
+<div class="panel panel-default" id="main" style="width: 80%;margin:1% 2% 2% 5%;float: left;">
+    <div class="panel" style="background-color: white">
+    <div class="btn-group-vertical">
+        <p class="navbar-text btn btn-default" style="vertical-align: middle" th:if="${session.flag == 1}"><a href="/import" data-toggle="modal" >上传试卷</a></p></br>
+        <p class="navbar-text btn btn-default  dropdown-toggle" ><a href="/toDetail" data-toggle="modal" >查看记录</a></p>
+
+    </div>
+    </div>
+</div>
+
 
 <div class="sidebar-footer">
     <div th:include="com/footer :: common_footer"></div>
 </div>
 </body>
+
 </html>

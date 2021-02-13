@@ -28,4 +28,9 @@ public class ExamServiceImpl implements ExamService {
     public List<Exam> findAllMyExamBySId(Integer sId) {
         return examMapper.findAllMyExamBySId(sId);
     }
+
+    @Override
+    public List<Exam> getExam(int sid) {
+        return examMapper.getExam(sid);
+    }
 }

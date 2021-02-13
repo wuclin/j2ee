@@ -1,18 +1,28 @@
 package com.jlu.jtee.controller;
 
+import com.jlu.jtee.domain.Exam;
 import com.jlu.jtee.service.StudentService;
 import com.jlu.jtee.util.Base64Util;
 import com.jlu.jtee.util.Camera;
 import com.jlu.jtee.util.FaceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static com.jlu.jtee.util.FaceUtil.compare_image;
@@ -45,7 +55,7 @@ public class StudentController {
         if (studentService.checkoutAdmin(username,password) != null){
             session.setAttribute("loginUser","管理员:"+username);
             session.setAttribute("flag",1);
-            return "redirect:/main.html";
+            return "redirect:/manager.html";
         }
         else{
             map.put("msg","用户名或密码错误");
@@ -195,6 +205,25 @@ public class StudentController {
         if (studentService.toCheckP(username) !=0)
             return 1;//验证成功
         else return 0;
+    }
+
+
+    @GetMapping("/getExamFace")
+    @ResponseBody
+    public List GetExam(String ExamName,
+                        HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //根据拿到的ExamName把文件夹的图片输出,先把ExamName处理一下
+        String root = ExamName.replaceAll("-|:| ", "");
+        //然后把目录下的文件名全部输出
+        ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+        String rootTrace = "file:D:\\face\\faceExam\\1231\\" + root;
+        Resource r = resourcePatternResolver.getResource(rootTrace);
+        String[] strArray = org.apache.commons.io.IOUtils.toString(r.getInputStream()).split("\\n");
+        List list= Arrays.asList(strArray);
+        return list;
+
+
 
     }
+
 }
