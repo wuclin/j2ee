@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>图片展示</title>
+    <title>考试图片展示</title>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
@@ -83,6 +83,7 @@
     //动态获取
     $(document).on("click", ".list-group-item", function() {
         var ExamName = $(this).attr("id");  //文件夹
+        var username = $("#Exam").val();    //用户名
 
         var s1 = ExamName.replaceAll("-","").replaceAll(" ","").replaceAll(":","");
 
@@ -91,7 +92,8 @@
             url : "/Student/getExamFace",
             type : 'get',
             data : {
-                ExamName : ExamName
+                ExamName : ExamName,
+                username : username
             },
             dataType : 'json',
             success : function (data) {

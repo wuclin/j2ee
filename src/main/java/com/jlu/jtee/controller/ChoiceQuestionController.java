@@ -10,6 +10,7 @@ import com.jlu.jtee.domain.Option;
 import com.jlu.jtee.service.ChoiceQuestionService;
 import com.jlu.jtee.service.ExamService;
 import com.jlu.jtee.service.StudentService;
+import com.jlu.jtee.util.Camera;
 import com.jlu.jtee.util.JsonUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -63,6 +65,9 @@ public class ChoiceQuestionController {
         examService.newExam(exam);
         logger.info("新建考试");
         model.addAttribute("Question",list);
+        //这里把时间写进去，传到useCamera 用session传时间
+        String ExamTime = new SimpleDateFormat("yyyyMMddHHmmss").format(date);//这里有一个坑，HH代表24小时，hh代表12小时
+        session.setAttribute("CreateTime",ExamTime);
         return "javaExmDetail";
     }
 
@@ -117,6 +122,10 @@ public class ChoiceQuestionController {
         examService.updateExam(status,score,postTime,sId);
 
         session.removeAttribute("entryExam");//离开考试页面后，把人脸识别成功的标识去掉
-            return new JsonUtil().serialize(ti);
+
+        Camera.shutDownCamera();
+
+
+        return new JsonUtil().serialize(ti);
     }
 }

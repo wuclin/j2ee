@@ -87,7 +87,9 @@ public class MainController {
     }
 
 
-
+    /**
+     * 管理员对考试的检查
+     * */
     @RequestMapping("unit/bill/showeinvoice/{filename}")
     @ResponseBody
     public void showEInvoice(HttpServletRequest request, HttpServletResponse response, HttpSession session,

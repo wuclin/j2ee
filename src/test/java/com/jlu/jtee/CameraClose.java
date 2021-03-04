@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class CameraClose extends JFrame {
+
     public static void main(String[] args) throws InterruptedException {
         Webcam webcam = Webcam.getDefault();
         webcam.setViewSize(WebcamResolution.VGA.getSize());
@@ -30,7 +31,14 @@ public class CameraClose extends JFrame {
 
         Thread.sleep(5000);
         webcam.close();
+        window.dispose();
+
+
+
+
 
     }
+    void shutdown(){
 
+    }
 }

@@ -187,13 +187,17 @@ public class StudentController {
     }
 
     //要把用户名传进去
+    //这里调用摄像头，把时间也给传进去
     @ResponseBody
     @GetMapping("UseCamera")
     public void useCamera(HttpSession session) throws InterruptedException, IOException {
-        String username = "", ExamType = "";
+        String username = "", ExamType = "", ExamCreateTime = "";
         username = (String)session.getAttribute("loginUser");
         ExamType = (String)session.getAttribute("ExamType");
-        Camera camera = new Camera(username,ExamType);
+        ExamCreateTime = (String)session.getAttribute("CreateTime");
+        //这边每一次用完都要移除
+        session.removeAttribute("CreateTime");
+        Camera camera = new Camera(username,ExamType,ExamCreateTime);
       //  return 1;
     }
 
@@ -207,16 +211,19 @@ public class StudentController {
         else return 0;
     }
 
-
+    /**
+     * showEInvoice方法的接口
+     *
+     * */
     @GetMapping("/getExamFace")
     @ResponseBody
-    public List GetExam(String ExamName,
+    public List GetExam(String ExamName, String username,
                         HttpServletRequest request, HttpServletResponse response) throws IOException {
         //根据拿到的ExamName把文件夹的图片输出,先把ExamName处理一下
         String root = ExamName.replaceAll("-|:| ", "");
         //然后把目录下的文件名全部输出
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-        String rootTrace = "file:D:\\face\\faceExam\\1231\\" + root;
+        String rootTrace = "file:D:\\face\\faceExam\\"+username+"\\" + root;
         Resource r = resourcePatternResolver.getResource(rootTrace);
         String[] strArray = org.apache.commons.io.IOUtils.toString(r.getInputStream()).split("\\n");
         List list= Arrays.asList(strArray);
